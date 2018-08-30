@@ -6,9 +6,9 @@ jobs:
       - image: microsoft/dotnet:2.1-sdk
     steps:
       - checkout
-      - cd ./amqp-sidecar-test
-      - dotnet build
-      - dotnet test
+      - run: cd ./amqp-sidecar-test
+      - run: dotnet build
+      - run: dotnet test
   # build:
   #   working_directory: /
   #   docker:
