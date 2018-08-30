@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test:
+  build:
     working_directory: /
     docker:
       - image: microsoft/dotnet:2.1-sdk
