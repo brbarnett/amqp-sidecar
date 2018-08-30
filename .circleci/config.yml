@@ -8,8 +8,6 @@ jobs:
       - run: dotnet build ./amqp-sidecar-tests/amqp-sidecar-tests.csproj
       - run: dotnet test ./amqp-sidecar-tests/amqp-sidecar-tests.csproj
   build:
-    requires:
-      - test
     docker:
       - image: docker:18.06.0-ce
     steps:
@@ -19,3 +17,12 @@ jobs:
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker build -t brbarnett/amqp-sidecar:ci -f ./amqp-sidecar/Dockerfile .
       - run: docker push -t brbarnett/amqp-sidecar:ci
+workflows:
+  version: 2
+  test_and_build:
+    jobs:
+      - test
+      - build
+        requires:
+          - test
+      
