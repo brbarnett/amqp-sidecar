@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  test:
+    working_directory: /
+    docker:
+      - image: microsoft/dotnet:2.1-sdk
+    steps:
+      - checkout
+      - cd ./amqp-sidecar-test
+      - dotnet build
+      - dotnet test
+  build:
+    working_directory: /
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker:
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: docker build -t brbarnett/amqp-sidecar:ci
+      - run: docker push -t brbarnett/amqp-sidecar:ci
