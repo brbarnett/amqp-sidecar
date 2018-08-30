@@ -1,0 +1,6 @@
+**/.gitignore
+**/bin/
+**/obj/
+**/Dockerfile
+
+**/config/

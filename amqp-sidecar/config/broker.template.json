@@ -1,0 +1,12 @@
+{
+    "rules": [
+        {
+            "exchange": "exchangename",
+            "queue": "queuename",
+            "routingKeys": [
+                "queue.*"
+            ],
+            "endpointUri": "http://service-hostname"
+        }
+    ]
+}
