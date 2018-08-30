@@ -11,11 +11,12 @@ jobs:
       - dotnet test
   build:
     working_directory: /
-    docker:
-      - image: docker:17.05.0-ce-git
+    # docker:
+    #   - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - setup_remote_docker:
+          version: 18.06.0-ce
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker build -t brbarnett/amqp-sidecar:ci
       - run: docker push -t brbarnett/amqp-sidecar:ci
