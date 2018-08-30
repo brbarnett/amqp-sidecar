@@ -11,6 +11,7 @@ jobs:
     docker:
       - image: docker:18.06.0-ce
     steps:
+      - setup_remote_docker
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker build -t brbarnett/amqp-sidecar:ci -f ./amqp-sidecar/Dockerfile .
