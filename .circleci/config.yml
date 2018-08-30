@@ -1,20 +1,26 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: microsoft/dotnet:2.1-sdk
     steps:
       - checkout
       - run: dotnet build ./amqp-sidecar-tests/amqp-sidecar-tests.csproj
       - run: dotnet test ./amqp-sidecar-tests/amqp-sidecar-tests.csproj
-  # build:
-  #   working_directory: /
-  #   docker:
-  #   #   - image: docker:17.05.0-ce-git
-  #   steps:
-  #     - checkout
-  #     - setup_remote_docker:
-  #         version: 18.06.0-ce
-  #     - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-  #     - run: docker build -t brbarnett/amqp-sidecar:ci
-  #     - run: docker push -t brbarnett/amqp-sidecar:ci
+  build:
+    docker:
+      - image: docker:18.06.0-ce
+    steps:
+      - checkout
+      # - setup_remote_docker:
+      #     version: 18.06.0-ce
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: docker build -t brbarnett/amqp-sidecar:ci
+      - run: docker push -t brbarnett/amqp-sidecar:ci
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - build
+      
