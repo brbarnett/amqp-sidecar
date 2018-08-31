@@ -48,9 +48,10 @@ workflows:
           requires:
             - build
       - package:
-          branches:
-            only:
-              - master
-              - develop
+          filters:
+            branches:
+              only:
+                - master
+                - develop
           requires: 
             - test
