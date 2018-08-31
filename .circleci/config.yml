@@ -26,14 +26,17 @@ jobs:
             - ./amqp-sidecar-tests/bin
       - run: dotnet test ./amqp-sidecar-tests/amqp-sidecar-tests.csproj
   package:
+    branches:
+      - master
+      - develop
     docker:
       - image: docker:18.06.0-ce
     steps:
       - setup_remote_docker
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker build -t brbarnett/amqp-sidecar:ci -f ./amqp-sidecar/Dockerfile .
-      - run: docker push brbarnett/amqp-sidecar:ci
+      - run: docker build -t brbarnett/amqp-sidecar:$CIRCLE_BRANCH -f ./amqp-sidecar/Dockerfile .
+      - run: docker push brbarnett/amqp-sidecar:$CIRCLE_BRANCH
 workflows:
   version: 2
   build_test_package:
