@@ -36,6 +36,11 @@ jobs:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker build -t brbarnett/amqp-sidecar:$CIRCLE_BRANCH -f ./amqp-sidecar/Dockerfile .
+      - run: 
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker tag brbarnett/amqp-sidecar:$CIRCLE_BRANCH brbarnett/amqp-sidecar:latest
+            fi
       - run: docker push brbarnett/amqp-sidecar:$CIRCLE_BRANCH
 workflows:
   version: 2
