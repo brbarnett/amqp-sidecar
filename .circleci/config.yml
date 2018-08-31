@@ -27,8 +27,9 @@ jobs:
       - run: dotnet test ./amqp-sidecar-tests/amqp-sidecar-tests.csproj
   package:
     branches:
-      - master
-      - develop
+      only:
+        - master
+        - develop
     docker:
       - image: docker:18.06.0-ce
     steps:
