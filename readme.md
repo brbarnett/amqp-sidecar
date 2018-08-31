@@ -1,4 +1,7 @@
 # AMQP Sidecar
+
+[![CircleCI](https://circleci.com/gh/brbarnett/amqp-sidecar/tree/master.svg?style=svg)](https://circleci.com/gh/brbarnett/amqp-sidecar/tree/master)
+
 The AMQP Sidecar is a companion app that logically decouples AMQP infrastucture code from your application logic. It seeks to accomplish the concept of transport independence in microservices. This accomplishes a few different goals:
 
 - __Messaging cohesion__ - two apps that interact with a broker can be built as HTTP-only, which makes testing easier. It's difficult to test when messages are sent to an AMQP broker, but in this case there is more general observability.
