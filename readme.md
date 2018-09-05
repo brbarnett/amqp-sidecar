@@ -31,11 +31,12 @@ RABBITMQ_PASSWORD: rabbitmqp@ssw0rd
 No additional configuration is required to publish messages. To enqueue a message, send a request in this format to the sidecar
 
 ```
-POST http://localhost:{sidecar-port}/{exchange}/{routingKey}
+POST http://localhost:8000/{exchange}/{routingKey}
 {
     ... any serialized object ...
 }
 ```
+_Note: the sidecar listens on port 8000_
 
 ### Consuming messages
 The sidecar requires that a configuration file named `broker.json` is mounted to the ./config directory in the container. The config looks like this

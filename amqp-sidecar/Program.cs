@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Text;
@@ -28,11 +29,11 @@ namespace amqp_sidecar
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseKestrel(options => options.Listen(IPAddress.Loopback, 8000));
 
         private static void ConfigureBrokerMessageHandler()
         {
-            // mock config until I figure out dynamic configs
             BrokerConfig config = new BrokerConfig();
 
             const string brokerConfigFilePath = "config/broker.json";
