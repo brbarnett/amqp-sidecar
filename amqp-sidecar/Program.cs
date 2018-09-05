@@ -33,7 +33,6 @@ namespace amqp_sidecar
 
         private static void ConfigureBrokerMessageHandler()
         {
-            // mock config until I figure out dynamic configs
             BrokerConfig config = new BrokerConfig();
 
             const string brokerConfigFilePath = "config/broker.json";
